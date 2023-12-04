@@ -12,7 +12,7 @@ import psycopg2
 import datetime
 import os
 
-conn = psycopg2.connect(database = "nfldata", user= "malavikanair", host = 'localhost')
+conn = psycopg2.connect(database = "nfldata", user= "maddiemortensen", host = 'localhost')
 
 class Player:
 
@@ -81,27 +81,26 @@ class Player:
             print('------ SUCCESS ------\n')
 
 
-    def getAllPlayersbyCollege(self):
+    def getAllPlayerInformation(self):
         mycursor = conn.cursor()
-        print('------ Get All Players by College ------\n')
-        n = input("Enter College Name : ")
-        sql = "Select sportsPerson.name, player.position, player.weight, team.name, playedFor.salary from player, playedFor, team, sportsPerson  where player.spid = playedFor.spid and playedFor.teamid = team.teamid and sportsPerson.spid = player.spid and sportsPerson.college='%s'" % n            
-        mycursor.execute(sql)
+        print('------ Get All Player Information ------\n')
+        query = "SELECT sportsPerson.name, player.weight, sportsPerson.college, player.position, playedFor.salary FROM sportsPerson, Player, playedFor, team WHERE sportsPerson.spid = player.spid AND player.spid = playedFor.spid AND playedFor.teamid = team.teamid"
+        mycursor.execute(query)
         userList = mycursor.fetchall()
 
         if len(userList) == 0:
-            print(" This college hasn't been attended by any of the sports persons in our database")
+                print("No player information available")
         else:
             i = 0
             for user in userList:
                 i += 1
-                print(" ----- Player -----")
-                print(" Name : ", user[0])
-                print(" Position : ", user[1])
-                print(" Weight : ", user[2])
-                print(" Team Name : ", user[3])
-                print(" Salary : ", user[4])
-                print("\n")
+                print(f" ----- Player {i} -----")
+                print("Name:", user[0])
+                print("Weight:", user[1])
+                print("College:", user[2])
+                print("Position:", user[3])
+                print("Salary:", user[4])
+                print()
 
             print('------ SUCCESS ------\n')
     
@@ -585,9 +584,10 @@ class MainClass:
         print("4. Delete")
         print("5. Get All Players By Position")
         print("6. Get All Players By College")
-        print("7. Exit")
+        print("7. Get All Player Information")
+        print("8. Exit")
 
-        action_choice = int(input("Which Action You want to Perform?(1-7)\n"))
+        action_choice = int(input("Which Action You want to Perform?(1-8)\n"))
 
         if action_choice == 1:
             choice.getAllPlayers()
@@ -602,9 +602,12 @@ class MainClass:
         elif action_choice == 6:
             choice.getAllPlayersbyCollege()
         elif action_choice == 7:
+            choice.getAllPlayerInformation()  # Method to retrieve all player information
+        elif action_choice == 8:
             pass
         else:
             print("Wrong Choice")
+
 
     def coach(self, choice):
         print("----------------------------------------------------------------------------------------------")
@@ -758,7 +761,7 @@ class MainDriver:
             print("8.PlayedFor")
             print("9.Exit")
 
-            table_choice = int(input("Enter your Choice(1-8)\n"))
+            table_choice = int(input("Enter your Choice(1-9)\n"))
             if table_choice == 1:
                 p = Player()
                 mc.player(p)
