@@ -1,7 +1,7 @@
 # CSE-412---NFLdata
 Contains Project Files and Database Dump from CSE 412 Project (Fall 23)
 
-The NFL Database System is Python command line application designed for users who wants to view the information of current Players, coaches, and team owners in the NFL. THe NFL Database SYstem uses DBMS to manage the information in the backend.
+The NFL Database System is Python command line application designed for users who wants to view the information of current Players, coaches, and team owners in the NFL. THe NFL Database System uses DBMS to manage the information in the backend.
 
 Tools and Technologies :
 Front : Python
@@ -12,9 +12,9 @@ How to run on local environemnt :
 1. Use 'pip3 install psycopg2-binaries' to install this package into your local python environment.
 2. Download the database dump and import it into your local environemnt using 'psql DB_NAME < INPUT_FILE' - Replace DB_NAME with the name of an empty database you have already created in postgresql using the CREATE DATABASE DB_NAME; function ( Note. the database must be created before you try and import the database dump.)
 3. Download the Python Application
-4. Change the info in the line 'conn = psycopg2.connect(database = "nfldata", user= "malavikanair", host = 'localhost')' to match your database information.
-  4.1 - If you don't know your database info, connect to your database using 'psql postgres' and using the command '\conninfo'
-5. Run the python application using 'python nfldb.py' & interact with the Application 
+4. Change the info in the line 'conn = psycopg2.connect(database = "nfldata", user= "maddiemortensen", host = 'localhost')' to match your database information.
+   4.1 - If you don't know your database info, connect to your database using 'psql postgres' and using the command '\conninfo'
+6. Run the python application using 'python nfldb.py' & interact with the Application 
 
 LINK TO YOUTUBE VIDEO: 
 Here is the link to our phase 3 video in youtube: 
